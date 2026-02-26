@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>QuickPoll</title>
+
+
+	<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+	<div class="center">
+		<center>
+            <h1>QuickPoll</h1>
+            <p>Quickly create polls. Polls are stored in non-persistent memory, so don't count on them being active for too long.</p>
+                <form action="/create">
+                    <input type="text" placeholder="Enter a question" id="question" name="question" required>
+                    <br>
+
+                    <input type="submit" value="Create">
+                </form>
+
+    </center>
+  </div>
+  <footer class="footer-links">
+    <a href="/">Home</a>
+    <!--<a href="/advanced">Advanced</a>-->
+  </footer><br>
+  <script src="/static/script.js"></script>
+</body>
+</html>
