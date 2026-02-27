@@ -468,3 +468,93 @@ a{
   gap: 0.75rem;
   flex-wrap: wrap;
 }
+
+h3{
+  margin:0;
+}
+
+.poll-options {
+  margin: 1rem 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.poll-option {
+  display: grid;
+  grid-template-columns: 1.15rem auto;
+  align-items: center;
+  column-gap: 1rem;
+  width: max-content;
+}
+
+.poll-option input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  display: grid;
+  place-content: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  max-width: 1.15rem;
+  margin: 0;
+  padding: 0;
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-bg);
+  box-shadow: none;
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast),
+    box-shadow var(--duration-fast),
+    background var(--duration-fast),
+    transform var(--duration-fast);
+}
+
+.poll-option input[type="radio"]::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  transform: scale(0);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.poll-option input[type="radio"]:hover {
+  border-color: var(--color-accent-hover);
+}
+
+.poll-option input[type="radio"]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+}
+
+.poll-option input[type="radio"]:checked {
+  border-color: var(--color-accent);
+  background: rgba(99, 102, 241, 0.12);
+  animation: radioSelect var(--duration-normal) var(--ease-out);
+}
+
+.poll-option input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+
+.poll-option label {
+  display: block;
+  flex: initial;
+  align-items: initial;
+  cursor: pointer;
+}
+
+@keyframes radioSelect {
+  0% {
+    transform: scale(0.9);
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
