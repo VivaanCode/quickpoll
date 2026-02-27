@@ -18,13 +18,12 @@
             <p>Quickly create polls. Polls are stored in non-persistent memory, so don't count on them being active for too long.</p>
                 <form action="/create">
                     <input type="text" placeholder="Enter a question" id="question" name="question" required>
-                    <br>
                     <input type="text" placeholder="Option 1" name="options" required>
-                    <br>
                     <input type="text" placeholder="Option 2" name="options" required>
-                    <br>
-                    <input type="text" placeholder="Option 3" name="options" required>
-
+                    <div class="button-group">
+                        <button type="button" onclick="addOption()">+</button>
+                        <button type="button" onclick="removeOption()">-</button>
+                    </div>
                     <input type="submit" value="Create">
                 </form>
 
@@ -34,6 +33,24 @@
     <a href="/">Home</a>
     <!--<a href="/advanced">Advanced</a>-->
   </footer><br>
-  <script src="/static/script.js"></script>
+  <script>
+    function addOption() {
+        const form = document.querySelector('form');
+        const newOption = document.createElement('input');
+        newOption.type = 'text';
+        newOption.placeholder = `Option ${form.querySelectorAll('input[name="options"]').length + 1}`;
+        newOption.name = 'options';
+        newOption.required = true;
+        form.insertBefore(newOption, form.querySelector('.button-group'));
+    }
+
+    function removeOption() {
+        const form = document.querySelector('form');
+        const options = form.querySelectorAll('input[name="options"]');
+        if (options.length > 2) {
+            form.removeChild(options[options.length - 1]);
+        }
+    }
+  </script>
 </body>
 </html>
