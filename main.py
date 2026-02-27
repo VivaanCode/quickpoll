@@ -13,7 +13,7 @@ def poll(id):
     if poll:
         return render_template("poll.html", poll=poll, id=id)
     else:
-        return 404 # update to custom 404 page
+        return "page not found", 404 # update to custom 404 page
 
 @app.route("/create")
 def create():
@@ -21,7 +21,8 @@ def create():
     options = request.args.getlist("options") # getlist is a very handy tool
     if question and options:
         id = api.createPoll(question, *options)
-        return f"Poll created with id: {id}"
+        return f"<a href='/poll/{id}'>Poll created!</a>"
+    return "Bad request", 400
 
 if __name__ == "__main__":
     app.run()
