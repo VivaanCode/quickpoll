@@ -13,7 +13,7 @@ def poll(id):
     if poll:
         return render_template("poll.html", poll=poll, id=id)
     else:
-        return "page not found", 404 # update to custom 404 page
+        return render_template("404.html"), 404
 
 @app.route("/create")
 def create():
@@ -21,8 +21,24 @@ def create():
     options = request.args.getlist("options") # getlist is a very handy tool
     if question and options:
         id = api.createPoll(question, *options)
-        return f"<a href='/poll/{id}'>Poll created!</a>"
-    return "Bad request", 400
+        return render_template("poll.html", poll=api.getPoll(id), id=id)
+    return render_template("400.html"), 400
+
+@app.errorhandler(404)
+def page_not_found():
+    return render_template("404.html"), 404
+
+@app.errorhandler(400)
+def bad_request():
+    return render_template("400.html"), 400
+
+@app.errorhandler(500)
+def internal_server_error():
+    return render_template("500.html"), 500
+
+# @app.errorhandler(Exception)
+# def test(e):
+#     return render_template("generic_error.html", e), 520 # i just searched up "generic error http code"
 
 if __name__ == "__main__":
     app.run()

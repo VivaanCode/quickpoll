@@ -8,14 +8,14 @@
 
 :root {
   --font-sans: 'Sen', system-ui, sans-serif;
-  --color-bg: #0f0f12;
-  --color-surface: #1a1a20;
-  --color-border: #2d2d36;
-  --color-text: #e8e8ec;
-  --color-text-muted: #8888a0;
-  --color-accent: #6366f1;
-  --color-accent-hover: #818cf8;
-  --color-accent-glow: rgba(99, 102, 241, 0.35);
+  --color-bg: #10120f;
+  --color-surface: #1a201a;
+  --color-border: #2f362d;
+  --color-text: #e8ece8;
+  --color-text-muted: #88a08b;
+  --color-accent: #63f178;
+  --color-accent-hover: #81f885;
+  --color-accent-glow: rgba(99, 241, 111, 0.35);
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
