@@ -24,16 +24,28 @@ def create():
         return render_template("poll.html", poll=api.getPoll(id), id=id)
     return render_template("400.html"), 400
 
+@app.route("/poll/<id>/vote")
+def vote(id):
+    option = request.args.get("option")
+    try:
+        newOption = int(option)
+    except ValueError:
+        return render_template("400.html"), 400
+    if option:
+        api.vote(id, newOption)
+        return render_template("poll.html", poll=api.getPoll(id), id=id)
+    return render_template("400.html"), 400
+
 @app.errorhandler(404)
-def page_not_found():
+def page_not_found(e):
     return render_template("404.html"), 404
 
 @app.errorhandler(400)
-def bad_request():
+def bad_request(e):
     return render_template("400.html"), 400
 
 @app.errorhandler(500)
-def internal_server_error():
+def internal_server_error(e):
     return render_template("500.html"), 500
 
 # @app.errorhandler(Exception)
