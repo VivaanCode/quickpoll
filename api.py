@@ -37,9 +37,8 @@ def getPoll(id):
 def vote(id, option):
     poll = getPoll(id)
     if poll:
-        if option in poll["options"]:
-            index = poll["votes"][option]
-            poll["votes"][index] += 1
+        if 0 <= option < len(poll["options"]):
+            poll["votes"][option] += 1
             return True
     return False
 

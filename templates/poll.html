@@ -7,7 +7,7 @@
     {% for option in poll.options %}
       <div class="poll-option">
         <input type="radio" id="option-{{ loop.index0 }}" name="option" value="{{ loop.index0 }}" required>
-        <label for="option-{{ loop.index0 }}">{{ option }}</label>
+        <label for="option-{{ loop.index0 }}">{{ option }}, {{poll.votes[loop.index0]}} votes</label>
       </div>
     {% endfor %}
   </div>
