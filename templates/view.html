@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{% set total_votes = poll.votes | sum %}
+
+<h3 class="poll-title">{{ poll.question }}</h3>
+<p class="poll-summary">{{ total_votes }} total vote{% if total_votes != 1 %}s{% endif %}</p>
+
+<div class="results-list">
+  {% for option in poll.options %}
+    {% set vote_count = poll.votes[loop.index0] %}
+    {% if total_votes > 0 %}
+      {% set percent = ((vote_count / total_votes) * 100) | round(1) %}
+    {% else %}
+      {% set percent = 0 %}
+    {% endif %}
+
+    <div class="result-item">
+      <div class="result-header">
+        <span class="result-option">{{ option }}</span>
+        <span class="result-count">{{ vote_count }} vote{% if vote_count != 1 %}s{% endif %}</span>
+      </div>
+      <div class="result-bar" role="img" aria-label="{{ option }} has {{ percent }} percent of votes">
+        <div class="result-fill" style="width: {{ percent }}%;"></div>
+      </div>
+      <div class="result-percent">{{ percent }}%</div>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
