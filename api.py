@@ -100,3 +100,11 @@ def vote(id, option):
         dbConnect()
         return vote(id, option)
 
+def removeOldPolls():
+    try:
+        with conn.cursor() as c:
+            c.execute("DELETE FROM polls WHERE id IN (SELECT id FROM polls LIMIT 100 OFFSET 1000)")
+            conn.commit()
+    except psycopg2.InterfaceError as e:
+        dbConnect()
+        removeOldPolls()

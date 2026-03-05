@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from flask import Flask, render_template, request, redirect
 import api
 
@@ -51,6 +53,21 @@ def view(id):
         return render_template("view.html", poll=poll, id=id)
     else:
         return render_template("404.html"), 404
+
+@app.route("/ping")
+def clean_up_garbage():
+  global lastDBClear
+  now = datetime.now()
+
+  if lastDBClear is None:
+    api.removeOldPolls()
+    lastDBClear = now
+    return "pong"
+  if now - lastDBClear >= timedelta(minutes=4.9):
+    api.removeOldPolls()
+    lastDBClear = now
+    return "pong 2"
+  return "hehe no"
 
 @app.errorhandler(404)
 def page_not_found(e):
