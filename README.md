@@ -12,5 +12,5 @@ gunicorn main:app
 env variables:
 ```
 DATABASE_URL=
-# grab a postgres url from neon.com
+# grab a postgres connection string from neon.com
 ```
