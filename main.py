@@ -20,6 +20,7 @@ def poll(id):
 
 @app.route("/create")
 def create():
+    api.removeOldPolls()
     question = request.args.get("question")
     options = request.args.getlist("options") # getlist is a very handy tool
 
@@ -56,18 +57,7 @@ def view(id):
 
 @app.route("/ping")
 def clean_up_garbage():
-  global lastDBClear
-  now = datetime.now()
-
-  if lastDBClear is None:
-    api.removeOldPolls()
-    lastDBClear = now
-    return "pong"
-  if now - lastDBClear >= timedelta(minutes=4.9):
-    api.removeOldPolls()
-    lastDBClear = now
-    return "pong 2"
-  return "hehe no"
+  return "pong"
 
 @app.errorhandler(404)
 def page_not_found(e):
